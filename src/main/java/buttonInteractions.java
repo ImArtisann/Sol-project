@@ -22,6 +22,7 @@ public class buttonInteractions extends ListenerAdapter {
     @Override
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
         JDA jda = event.getJDA();
+        MessageBuilder mess = new MessageBuilder();
         if(event.getComponentId().equals("discordID")){
             event.reply(event.getUser().getId()).setEphemeral(true).queue();
         }else if(event.getComponentId().equals("Deposit")){
@@ -71,7 +72,7 @@ public class buttonInteractions extends ListenerAdapter {
                 event.reply("You dont have any balance to withdraw yet").setEphemeral(true).queue();
             }
         }else if(event.getComponentId().equals("Restart-cf")){
-            MessageBuilder mess = new MessageBuilder();
+           
             mess.append("Heads or tails?")
                     .setActionRows(
                             ActionRow.of(SelectMenu.create("place-Hbet")
@@ -92,15 +93,13 @@ public class buttonInteractions extends ListenerAdapter {
                     );
             event.reply(mess.build()).setEphemeral(true).queue();
         }else if(event.getComponentId().equalsIgnoreCase("high")){
-            MessageBuilder mess = new MessageBuilder();
+            
             mess = hl.processChoice("high",event.getUser().getId(), jda);
             event.reply(mess.build()).setEphemeral(true).queue();
         }else if(event.getComponentId().equalsIgnoreCase("low")){
-            MessageBuilder mess = new MessageBuilder();
             mess = hl.processChoice("low",event.getUser().getId(), jda);
             event.reply(mess.build()).setEphemeral(true).queue();
         }else if(event.getComponentId().equalsIgnoreCase("restart-hl")){
-            MessageBuilder mess = new MessageBuilder();
             mess.append("To Start the game place how much you want to bet")
                     .setActionRows(
                             ActionRow.of(SelectMenu.create("place-highlow")
@@ -112,7 +111,6 @@ public class buttonInteractions extends ListenerAdapter {
                                             SelectOption.of("2", "2")).build()));
             event.reply(mess.build()).setEphemeral(true).queue();
         }else if(event.getComponentId().equalsIgnoreCase("restart-spin")){
-            MessageBuilder mess = new MessageBuilder();
             mess.append("Place your bet for the spin")
                     .setActionRows(
                             ActionRow.of(SelectMenu.create("place-Spin")
